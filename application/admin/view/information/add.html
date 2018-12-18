@@ -1,0 +1,90 @@
+{layout name="layout" title="信息管理" /}
+ <form  id="defaultForm" role="form" method="POST" enctype="multipart/form-data" action="{:url('/admin/information/add/')}">
+  
+  <div class="form-group">
+    <label for="exampleInputPassword">ID</label>
+    <input type="text" class="form-control"   name="iid" id="iid" placeholder="请输入ID">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword">信息名称</label>
+    <input type="text" class="form-control"   name="name" id="name" placeholder="请输入信息名称">
+  </div>
+ <div class="form-group">
+    <label for="exampleInputPassword">信息位置</label>
+   <input type="text" class="form-control"   name="location" id="location" placeholder="请输入信息位置">
+  </div>
+  
+   <div class="form-group">
+    <label for="exampleInputPassword">车型 </label>
+   <select name="car_model" id="car_model" class="form-control">
+   <option value="">不选</option>
+ 	<option value="VV7C">VV7C</option>
+ 	<option value="VV7S">VV7S</option>
+ 	<option value="VV5S">VV5S</option>
+ 	<option value="P8">P8</option>
+ 	<option value="VV6">VV6</option>
+ 	</select>
+  </div>
+  
+  
+ <div class="form-group">
+    <label for="exampleInputEmail">状态：</label>
+ 	<select name="status" id="status" class="form-control">
+ 	<option value="1" {present name="data.status"}{if condition="$data.status eq 1"} selected="selected" {/if} {/present}>启用</option>
+ 	<option value="2" {present name="data.status"}{if condition="$data.status eq 2"} selected="selected" {/if} {/present}>禁用</option>
+ 	</select>
+  </div>
+  <input type="hidden" name="__token__" value="{$Request.token}" />
+  <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />
+  <button type="submit" class="btn btn-default">提交</button>
+  <button type="reset" class="btn btn-default">重置</button>
+</form>	
+
+ <!-- 配置文件 -->
+<script src="__ROOT__kindeditor/kindeditor-all.js"  type="text/javascript"></script>
+<script src="__ROOT__kindeditor/lang/zh-CN.js"  type="text/javascript"></script>
+<link rel="stylesheet" href="__ROOT__kindeditor/themes/default/default.css" />
+
+ <script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        	name: {
+                message: 'The title is not valid',
+                validators: {
+                    notEmpty: {
+                        message: '信息名称必须填写'
+                    },
+                }
+            },
+            
+            iid: {
+                message: 'The ID is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'ID必须填写'
+                    },
+                }
+            },
+ 
+            location: {
+                validators: {
+                    notEmpty: {
+                        message: '信息位置不能为空'
+                    },
+                }
+            },
+           
+      
+        }
+    });
+});
+</script>
+ 
+

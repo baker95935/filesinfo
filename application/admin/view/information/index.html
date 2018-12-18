@@ -1,0 +1,39 @@
+{layout name="layout" /}
+<h2>信息列表 &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/information/add/')} ">添加信息</a></small></h2>
+<form action="{:url('/admin/information/index')}" method="POST">
+名称：<input type="text" name="search" id="search" value="{$search}">
+<input type="submit" value="查询">
+</form>
+<br>
+<table class="table table-striped table-bordered table-hover">
+   <thead>
+     <tr>
+       <th>系统ID</th>
+       <th>ID</th>
+       <th>信息名称 </th>
+       <th>信息位置</th>
+       <th>车     型</th>
+       <th>状态</th>
+       <th>注册时间</th>
+       <th>管理</th>
+     </tr>
+   </thead>
+   <tbody>
+   {foreach $list as $vo}
+     <tr>
+       <td>{$vo.id}</td>
+       <td>{$vo.iid}</td>
+       <td>{$vo.name}</td>
+       <td>{$vo.location}</td>
+       <td>{$vo.car_model}</td>
+       <td>{$vo.status|getStatusName}</td>
+       <td>{$vo.create_time}</td>
+       <td><a href="{:url('/admin/information/edit/id/'.$vo->id)} ">编辑</a>  <a onclick="return  confirm('确定删除吗，操作不可逆')" href="{:url('/admin/information/del/id/'.$vo->id)} ">删除</a></td>
+     </tr>
+     {/foreach}
+   </tbody>
+ </table>
+ <div align="right">
+{$list->render()}
+</div>
+ 

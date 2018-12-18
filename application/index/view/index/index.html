@@ -1,0 +1,69 @@
+ {include file="common/header" /}
+   <div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">网站前台&nbsp;&nbsp;&nbsp;&nbsp;{$Think.session.username}</div>
+                <div class="panel-body">
+<form id="defaultForm" class="form-horizontal" role="form" method="POST" action="{:url('/index/login/login/')}">
+  <div class="form-group">
+    <label  class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+       <a  href="{:url('/index/login/register/')}">注册</a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+       <a  href="{:url('/index/login/login/')}">登录</a>
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+       <a  href="{:url('/index/login/forget/')}">忘记密码</a>
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label  class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+       <a  href="{:url('/index/login/logout/')}">去商城</a>
+    </div>
+  </div>
+     <div class="form-group">
+    <label  class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+       <a  href="{:url('/admin/login/login/')}">后台登录</a>
+    </div>
+  </div>
+  
+       <div class="form-group">
+    <label  class="col-md-4 control-label"></label>
+    <div class="col-md-6">
+       <a id="b01" href="#">点击测试AJAX</a>
+    </div>
+  </div>
+ 
+</form>
+              </div>
+         </div>
+     </div>
+ </div>
+ <script>
+ $(document).ready(function(){
+	  $("#b01").click(function(){
+	   $.ajax({
+		   type:'get',
+		   url:"http://company.6328.net/index/api/information/id/26",
+		   async:"true",
+		   dataType:'jsonp',
+		   success:function(res){
+			   alert(res.id);
+		   }
+		   });
+	  });
+	});
+ </script>
+  
+{include file="common/footer" /}

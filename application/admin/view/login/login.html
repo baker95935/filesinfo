@@ -1,0 +1,67 @@
+ {include file="common/header" /}
+   <div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+<form id="defaultForm" class="form-horizontal" role="form" method="POST" action="{:url('/admin/login/login/')}">
+  <div class="form-group">
+    <label for="email" class="col-md-4 control-label">username</label>
+    <div class="col-md-6">
+      <input type="text" class="form-control" name="username" id="username" placeholder="please input your username">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password" class="col-md-4 control-label">password</label>
+    <div class="col-md-6">
+      <input type="password" class="form-control" name="password" id="password" placeholder="please input your password">
+    </div>
+  </div>
+ 
+  <div class="form-group">
+    <div class="col-md-8 col-md-offset-4">
+      <button type="submit" class="btn btn-default">submit</button>
+      <button type="reset" class="btn btn-default">reset</button>
+    </div>
+  </div>
+</form>
+              </div>
+         </div>
+     </div>
+ </div>
+ 
+    
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'please input username'
+                    },
+                }
+            },
+ 
+     
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'please input password'
+                    },
+                }
+            },
+           
+      
+        }
+    });
+});
+</script>
+{include file="common/footer" /}
