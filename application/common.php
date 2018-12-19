@@ -15,7 +15,7 @@ function getStatusName($status)
 {
 	$name="";
 	
-	$status==1?$name='启用':$name="禁用";
+	$status==1?$name='enable':$name="disable";
 	
 	return $name;
 }

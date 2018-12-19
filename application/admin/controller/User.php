@@ -13,15 +13,11 @@ class User extends Common
 		$request = request();
 		$search['id']=$request->param('id');
 		$search['username']=$request->param('username');
-		$search['shop_id']=$request->param('shop_id');
-		$search['shop_username']=$request->param('shop_username');
 		$search['realname']=$request->param('realname');
 		$search['phone']=$request->param('phone');
 	 
 		!empty($search['id']) && $where['id']=['=',$search['id']];
 		!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
-		!empty($search['shop_id']) && $where['shop_id']=['like',"%".$search['shop_id']."%"];
-		!empty($search['shop_username']) && $where['shop_username']=['like',"%".$search['shop_username']."%"];
 		!empty($search['realname']) && $where['realname']=['like',"%".$search['realname']."%"];
 		!empty($search['phone']) && $where['phone']=['like',"%".$search['phone']."%"];
 		
@@ -45,11 +41,7 @@ class User extends Common
 			//数据获取
 			$data=array(
 				'username'=>$request->param('username'),
-				'password'=>md5($request->param('password')),
-				'confirmPassword'=>md5($request->param('confirmPassword')),
-			
-				'shop_id'=>$request->param('shop_id'),
-				'shop_username'=>$request->param('shop_username'),
+			 
 				'realname'=>$request->param('realname'),
 				'phone'=>$request->param('phone'),
 				'status'=>$request->param('status'),

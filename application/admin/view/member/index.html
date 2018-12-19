@@ -1,20 +1,20 @@
 {layout name="layout" /}
-<h2>管理员列表 &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/member/add/')} ">添加管理员</a></small></h2>
+<h2>admin list &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/member/add/')} ">add admin</a></small></h2>
 <form action="{:url('/admin/Member/index')}" method="POST">
-用户名：<input type="text" name="search" id="search" value="{$search}">
-<input type="submit" value="查询">
+username：<input type="text" name="search" id="search" value="{$search}">
+<input type="submit" value="search">
 </form>
 <br>
 <table class="table table-striped table-bordered table-hover">
    <thead>
      <tr>
        <th>ID</th>
-       <th>用户名</th>
-       <th>姓名</th>
-       <th>手机号</th>
-       <th>状态</th>
-       <th>注册时间</th>
-       <th>管理</th>
+       <th>username</th>
+       <th>realname</th>
+       <th>phone</th>
+       <th>status</th>
+       <th>reg time</th>
+       <th>manage</th>
      </tr>
    </thead>
    <tbody>
@@ -26,7 +26,7 @@
        <td>{$vo.phone}</td>
        <td>{$vo.status|getStatusName}</td>
        <td>{$vo.create_time}</td>
-       <td><a href="{:url('/admin/member/add/id/'.$vo->id)} ">编辑</a>  <a onclick="return  confirm('确定删除吗，操作不可逆')" href="{:url('/admin/member/del/id/'.$vo->id)} ">删除</a></td>
+       <td><a href="{:url('/admin/member/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/member/del/id/'.$vo->id)} ">delete</a></td>
      </tr>
      {/foreach}
    </tbody>
