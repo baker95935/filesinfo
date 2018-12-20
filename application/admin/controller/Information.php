@@ -100,25 +100,18 @@ class Information extends Common
 		$this->error('error,please retry');
 	}
 	
-	public function delE()
+	public function show()
 	{
-		$infoE=new infoEModel();
+		$information=new informationModel();
 		$request = request();
-		
-		if($request->method()=='GET') {
+	
+		$id=$request->param('id');
 			
-			$id=$request->param('id');
-			$iid=$request->param('iid');
-			$result=0;
-			$result=$infoE->deleteInfo($id);
-			
-			if($result==0){
-				$this->error('operation failed,please retry');
-			} else {
-				$this->success('operation success', '/admin/information/edit/id/'.$iid);
-			}
-		}
-		
-		$this->error('error,please retry');
+		$data=array();
+		!empty($id) && $data=informationModel::get($id);
+	
+		$this->assign('data',$data);
+		return view();
 	}
+	 
 }

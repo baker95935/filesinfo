@@ -24,7 +24,7 @@ realname：<input type="text" name="search" id="search" value="{$search}">
        <td>{$vo.realname}</td>
        <td><a target="_blank" href="{$vo.pic}"><img src="{$vo.pic}" width="20px" height="20px"></a></td>
        <td>{$vo.create_time}</td>
-       <td><a href="{:url('/admin/information/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/information/del/id/'.$vo->id)} ">delete</a></td>
+       <td><a href="{:url('/admin/information/show/id/'.$vo->id)} ">view</a> <a href="{:url('/admin/information/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/information/del/id/'.$vo->id)} ">delete</a></td>
      </tr>
      {/foreach}
    </tbody>
