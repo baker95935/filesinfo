@@ -2,7 +2,6 @@
 <h2>user list &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/user/add/')} ">add user</a></small></h2>
 <form action="{:url('/admin/User/index')}" method="POST">
 ID:<input type="text" name="id" id="id" value="{$search.id}">
-username:<input type="text" name="username" id="username" value="{$search.username}">
 realname:<input type="text" name="realname" id="realname" value="{$search.realname}">
 phone:<input type="text" name="phone" id="phone" value="{$search.phone}">
 <input type="submit" value="search">
@@ -12,7 +11,6 @@ phone:<input type="text" name="phone" id="phone" value="{$search.phone}">
    <thead>
      <tr>
        <th>ID</th>
-       <th>username</th>
        <th>realname</th>
        <th>phone</th>
        <th>status</th>
@@ -24,7 +22,6 @@ phone:<input type="text" name="phone" id="phone" value="{$search.phone}">
    {foreach $list as $vo}
      <tr>
        <td>{$vo.id}</td>
-       <td>{$vo.username}</td>
        <td>{$vo.realname}</td>
        <td>{$vo.phone}</td>
        <td>{$vo.status|getStatusName}</td>
