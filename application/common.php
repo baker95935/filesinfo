@@ -20,6 +20,15 @@ function getStatusName($status)
 	return $name;
 }
 
+function getSexName($sex)
+{
+	$name="";
+
+	$sex==1?$name='男':$name="女";
+
+	return $name;
+}
+
 //字符串截取函数
 function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=false){
  if(function_exists("mb_substr")){

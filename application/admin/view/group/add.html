@@ -1,0 +1,92 @@
+{layout name="layout" title="admin add" /}
+ <form  id="defaultForm" role="form" method="POST"  action="{:url('/admin/member/add/')}">
+   <div class="form-group">
+    <label for="exampleInputUsername">username：</label>
+    <input type="text" class="form-control" value="{present name="data.username"}{$data.username}{/present}" name="username" id="username" placeholder="please input username">
+  </div>
+ 
+  <div class="form-group">
+    <label for="exampleInputPassword">password</label>
+    <input type="password" class="form-control"   name="password" id="password" placeholder="please input password">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword">confirm password</label>
+    <input type="password" class="form-control"   name="confirmPassword" id="confirmPassword" placeholder="please input confirm password">
+  </div>
+ <div class="form-group">
+    <label for="exampleInputPassword">realname</label>
+    <input type="text" class="form-control" value="{present name="data.realname"}{$data.realname}{/present} "   name="realname" id="realname" placeholder="please input realname">
+  </div>
+ <div class="form-group">
+    <label for="exampleInputPassword">phone</label>
+    <input type="text" class="form-control" value="{present name="data.phone"}{$data.phone}{/present} "   name="phone" id="phone" placeholder="please input phone">
+  </div>
+ <div class="form-group">
+    <label for="exampleInputEmail">status：</label>
+ 	<select name="status" id="status" class="form-control">
+ 	<option value="1" {present name="data.status"}{if condition="$data.status eq 1"} selected="selected" {/if} {/present}>enable</option>
+ 	<option value="2" {present name="data.status"}{if condition="$data.status eq 2"} selected="selected" {/if} {/present}>disable</option>
+ 	</select>
+  </div>
+  <input type="hidden" name="__token__" value="{$Request.token}" />
+  <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />
+  <button type="submit" class="btn btn-default">submit</button>
+  <button type="reset" class="btn btn-default">reset</button>
+</form>	
+
+ <script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'please input username'
+                    },
+                    stringLength: {
+                        min: 5,
+                        max: 30,
+                        message: 'username must between 5 and 30 chars'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'username must Letters & Numbers'
+                    }
+                }
+            },
+ 
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'please input password'
+                    },
+                    identical: {
+                        field: 'confirmPassword',
+                        message: 'password and confirmpassword must same'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'please input password'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'password and confirmpassword must same'
+                    }
+                }
+            },
+            
+      
+        }
+    });
+});
+</script>
