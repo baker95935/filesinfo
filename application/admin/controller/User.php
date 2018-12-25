@@ -13,13 +13,11 @@ class User extends Common
 		$request = request();
 		$search['id']=$request->param('id');
 		//$search['username']=$request->param('username');
-		$search['realname']=$request->param('realname');
-		$search['phone']=$request->param('phone');
+		$search['username']=$request->param('username');
 	 
 		!empty($search['id']) && $where['id']=['=',$search['id']];
-		//!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
+		!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
 		!empty($search['realname']) && $where['realname']=['like',"%".$search['realname']."%"];
-		!empty($search['phone']) && $where['phone']=['like',"%".$search['phone']."%"];
 		
 		empty($where['id']) && $where['id']=['>',0];
 		
