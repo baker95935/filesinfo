@@ -40,11 +40,17 @@ class User extends Common
 		if($request->method()=='POST') {
 			//数据获取
 			$data=array(
+				'familyname'=>$request->param('familyname'),
 				'username'=>$request->param('username'),
-			 
-				'realname'=>$request->param('realname'),
-				'phone'=>$request->param('phone'),
-				'status'=>$request->param('status'),
+				'age'=>$request->param('age'),
+				'sex'=>$request->param('sex'),
+					
+				'idcard'=>$request->param('idcard'),
+				'country'=>$request->param('country'),
+				'address'=>$request->param('address'),
+				'contact'=>$request->param('contact'),
+				'pic'=>$request->param('pic_url'),
+				'beizhu'=>$request->param('beizhu'),
 			
 				'id'=>$request->param('id'),
 			);
@@ -57,7 +63,6 @@ class User extends Common
 			
 			} else {
 				 
-				unset($data['confirmPassword']);
 				
 				$result=0;
 				if(empty($id)){//添加

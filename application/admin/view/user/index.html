@@ -11,10 +11,12 @@ phone:<input type="text" name="phone" id="phone" value="{$search.phone}">
    <thead>
      <tr>
        <th>ID</th>
-       <th>realname</th>
-       <th>phone</th>
-       <th>status</th>
-       <th>reg time</th>
+       <th>姓</th>
+       <th>名</th>
+       <th>性别</th>
+       <th>年龄</th>
+       <th>国籍</th>
+       <th>联系方式</th>
        <th>manage</th>
      </tr>
    </thead>
@@ -22,11 +24,13 @@ phone:<input type="text" name="phone" id="phone" value="{$search.phone}">
    {foreach $list as $vo}
      <tr>
        <td>{$vo.id}</td>
-       <td>{$vo.realname}</td>
-       <td>{$vo.phone}</td>
-       <td>{$vo.status|getStatusName}</td>
-       <td>{$vo.create_time}</td>
-       <td><a href="{:url('/admin/user/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/user/del/id/'.$vo->id)} ">delete</a></td>
+       <td>{$vo.familyname}</td>
+       <td>{$vo.username}</td>
+       <td>{$vo.sex}</td>
+       <td>{$vo.age}</td>
+       <td>{$vo.country}</td>
+       <td>{$vo.contact}</td>
+       <td><a href="{:url('/admin/user/add/id/'.$vo->id)} ">view</a> <a href="{:url('/admin/user/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/user/del/id/'.$vo->id)} ">delete</a></td>
      </tr>
      {/foreach}
    </tbody>
