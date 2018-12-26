@@ -40,6 +40,7 @@ class Member extends Common
 				'password'=>md5($request->param('password')),
 				'confirmPassword'=>md5($request->param('confirmPassword')),
 				'realname'=>$request->param('realname'),
+				'group'=>$request->param('group'),
 				'phone'=>$request->param('phone'),
 				'status'=>$request->param('status'),
 				'id'=>$request->param('id'),
@@ -74,6 +75,10 @@ class Member extends Common
 			
 		$data=array();
 		!empty($id) && $data=memberModel::get($id);
+		
+		//获取用户组
+		$groupList=model('group')->order('id', 'desc')->select();
+		$this->assign('groupList',$groupList);
  
 		$this->assign('data',$data);
 		return view();

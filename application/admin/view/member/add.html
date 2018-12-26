@@ -17,6 +17,16 @@
     <label for="exampleInputPassword">realname</label>
     <input type="text" class="form-control" value="{present name="data.realname"}{$data.realname}{/present} "   name="realname" id="realname" placeholder="please input realname">
   </div>
+  
+   <div class="form-group">
+    <label for="exampleInputPassword">group</label><br>
+   	        <select name="group" >
+		        {foreach name="groupList" item="item"}
+					<option value="{$item.id}" {present name="data.group"} {if condition="$data.group eq $item.id "} selected="selected" {/if}{/present}>{$item.name}</option>
+		        {/foreach}
+	        </select>
+  </div>
+  
  <div class="form-group">
     <label for="exampleInputPassword">phone</label>
     <input type="text" class="form-control" value="{present name="data.phone"}{$data.phone}{/present} "   name="phone" id="phone" placeholder="please input phone">

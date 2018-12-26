@@ -46,6 +46,7 @@ class Member extends Model
 				{
 					Session::set('username',$dataInfo->username);
 					Session::set('password',md5($dataInfo->id.$dataInfo->password));
+					Session::set('group',$dataInfo->group);
 					$result=1;
 				}
 			}
