@@ -130,3 +130,31 @@ function onlineTime($start_time,$end_time)
     	}
     	return $res;
     }
+    
+    
+    //检查用户组权限
+    function checkGroupRights($groupid,$right)
+    {
+    	$res=0;
+    	
+    	//思路整理  根据用户组 获取用户组的权限
+    	$group=model('group');
+    	$groupInfo=$group->find($groupid);
+    	if($groupInfo['super']==1) {
+    		$res=1;
+    	} else {
+    		//分别查找 type和node
+    		!empty($groupInfo['type']) && $typeAry=explode(',',$groupInfo['type']);
+    		!empty($groupInfo['node']) && $nodeAry=explode(',',$groupInfo['node']);
+    		if(in_array($right,$typeAry)) {
+    			$res=1;
+    		}
+    		
+    		if(in_array($right,$nodeAry)) {
+    			$res=1;
+    		}
+    	}
+    	
+    	return $res;
+    	
+    }

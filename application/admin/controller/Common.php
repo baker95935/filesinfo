@@ -22,6 +22,18 @@ class Common extends Controller
 			$this->redirect('/admin/login/login/');
 		}
 		
+		$rights='';
+		//左侧权限校验
+		$group=Session::get('group');
+ 
+		$groupInfo=model('group')->find($group);
+		if($groupInfo['super']==1) {
+			$rights='all';
+		} else {
+			!empty($groupInfo['type']) && $rights=explode(',',$groupInfo['type']);
+		}
+		 
+		$this->assign('rights',$rights);
 	}
 
 }
