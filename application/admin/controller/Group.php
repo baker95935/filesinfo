@@ -28,7 +28,7 @@ class Group extends Common
 
 	public function add()
 	{
-		$member=new groupModel();
+		$group=new groupModel();
 		$request = request();
 		
 		$id=$request->param('id');
@@ -36,38 +36,44 @@ class Group extends Common
 		if($request->method()=='POST') {
 			//数据获取
 			$data=array(
-				'username'=>$request->param('username'),
-				'password'=>md5($request->param('password')),
-				'confirmPassword'=>md5($request->param('confirmPassword')),
-				'realname'=>$request->param('realname'),
-				'phone'=>$request->param('phone'),
-				'status'=>$request->param('status'),
+				'name'=>$request->param('groupname'),
+				'remark'=>$request->param('remark'),
 				'id'=>$request->param('id'),
+				'super'=>$request->param('super'),
 			);
 			
-			//数据校验
-			$validate = validate('member');
+			//如果不是超级权限获取列表
+			if($data['super']!=1) {
+				$vars=$request->param();
+				isset($vars['type']) && $type=$vars['type'];
+				isset($vars['node']) && $node=$vars['node'];
+					
+				//数组变成字符串
+				if(!empty($type)){
+					$typeStr=implode(",",$type);
+					$data['type']=$typeStr;
+				}
 			
-			if(!$validate->check($data)){
-				$this->error($validate->getError());
+				if(!empty($node)){
+					$nodeStr=implode(",",$node);
+					$data['node']=$nodeStr;
+				}
 			
+			}
+			
+				
+			$result=0;
+			if(empty($id)){//添加
+				$data['create_time']=time();
+				$result=$group->addInfo($data);
 			} else {
-				 
-				unset($data['confirmPassword']);
-				
-				$result=0;
-				if(empty($id)){//添加
-					$data['create_time']=time();
-					$result=$member->addInfo($data);
-				} else {
-					$result=$member->addInfo($data,array('id'=>$id));//更新
-				}
-				
-				if($result) {
-					$this->success('operation success!', '/admin/member/index/');
-				} else {
-					$this->success('operation failed,please retry', '/admin/member/index/');
-				}
+				$result=$group->addInfo($data,array('id'=>$id));//更新
+			}
+			
+			if($result) {
+				$this->success('operation success!', '/admin/group/index/');
+			} else {
+				$this->success('operation failed,please retry', '/admin/group/index/');
 			}
 	
 		}
@@ -75,6 +81,24 @@ class Group extends Common
 		$data=array();
 		!empty($id) && $data=groupModel::get($id);
  
+		//权限列表搞成数组容易实现
+		if($data && $data['super']==2) {
+			!empty($data['type']) && $data['typeAry']=explode(',',$data['type']);
+			!empty($data['node']) && $data['nodeAry']=explode(',',$data['node']);
+		}
+		
+		//获取权限
+		$menuList=array(
+				'files'=>array('add','delete','edit','view'),
+				'user'=>array('add','delete','edit','view'),
+		);
+		
+		//设置默认显示的权限
+		$defaultRight=1;
+		!empty($data) && $defaultRight=$data['super'];
+		$this->assign('defaultRight',$defaultRight);
+		
+		$this->assign('menuList',$menuList);
 		$this->assign('data',$data);
 		return view();
 	}
