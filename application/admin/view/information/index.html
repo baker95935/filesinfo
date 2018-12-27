@@ -1,5 +1,5 @@
 {layout name="layout" /}
-<h2>files list &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/information/add/')} ">add files</a></small></h2>
+<h2>files list &nbsp; &nbsp; &nbsp;{if condition="$addRight eq 1"}<small><a href="{:url('/admin/information/add/')} ">add files</a></small>{/if}</h2>
 <form action="{:url('/admin/information/index')}" method="POST">
 realname：<input type="text" name="search" id="search" value="{$search}">
 <input type="submit" value="search">
@@ -24,7 +24,11 @@ realname：<input type="text" name="search" id="search" value="{$search}">
        <td>{$vo.realname}</td>
        <td><a target="_blank" href="{$vo.pic}"><img src="{$vo.pic}" width="20px" height="20px"></a></td>
        <td>{$vo.create_time}</td>
-       <td><a href="{:url('/admin/information/show/id/'.$vo->id)} ">view</a> <a href="{:url('/admin/information/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/information/del/id/'.$vo->id)} ">delete</a></td>
+       <td>
+       {if condition="$viewRight eq 1"} <a href="{:url('/admin/information/show/id/'.$vo->id)} ">view</a> &nbsp;{/if}
+       {if condition="$editRight eq 1"} <a href="{:url('/admin/information/add/id/'.$vo->id)} ">edit</a>  &nbsp;{/if}
+       {if condition="$deleteRight eq 1"} <a onclick="return  confirm('confirm delete')" href="{:url('/admin/information/del/id/'.$vo->id)} ">delete</a>{/if}
+       </td>
      </tr>
      {/foreach}
    </tbody>

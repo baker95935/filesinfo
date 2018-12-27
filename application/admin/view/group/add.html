@@ -12,12 +12,12 @@
  
 <div class="form-group">
      <label for="exampleInputPassword">is super admin</label><br>
-	 	<input   type="radio" name="super" value="1" {notpresent name="data.super"} checked {/notpresent} {present name="data.super"} {if condition="$data.super eq 1 "} checked  {/if} {/present}  />是 
-	    <input   type="radio" name="super" value="2" {present name="data.super"} {if condition="$data.super eq 2 "} checked  {/if} {/present}  />否
+	 	<input   type="radio" name="super" value="1" {notpresent name="data.super"} checked {/notpresent} {present name="data.super"} {if condition="$data.super eq 1 "} checked  {/if} {/present}  />yes 
+	    <input   type="radio" name="super" value="2" {present name="data.super"} {if condition="$data.super eq 2 "} checked  {/if} {/present}  />no
 </div>
 
 <div class="form-group" id="rights">
-     <label for="exampleInputPassword">rights</label>
+     <label for="exampleInputPassword">rights</label> 
                     <ul>
 					{foreach name="menuList" key="key" item="item"}                
                 	<li><label class='checkbox'><input type='checkbox' name='type[]' value='{$key}' {present name="data.typeAry"} {if condition="in_array($key,$data.typeAry)"} checked="checked"  {/if} {/present}   />{$key}</label>

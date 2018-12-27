@@ -7,6 +7,8 @@ use think\Request;
 use app\admin\model\Information as informationModel;
 use app\admin\model\InformationExtend as infoEModel;
 use think\File;
+use think\Session;
+
 //信息
 class Information extends Common
 {
@@ -21,10 +23,24 @@ class Information extends Common
 		!empty($search) && $where['realname']=['like',"%".$search."%"];
 		$where['id']=['>',0];
 		
+		//登录用户的权限进行校验
+		$group=Session::get('group');
+		//增删改查校验
+		$addRight=$editRight=$deleteRight=$viewRight=0;
+		$addRight=checkGroupRights($group,'filesadd');
+		$editRight=checkGroupRights($group,'filesedit');
+		$deleteRight=checkGroupRights($group,'filesdelete');
+		$viewRight=checkGroupRights($group,'filesrview');
+		
 		$list=$information->getListInfo($where,array('search'=>$search));
  
 		$this->assign('list',$list);
 		$this->assign('search',$search);
+		
+		$this->assign('addRight',$addRight);
+		$this->assign('editRight',$editRight);
+		$this->assign('deleteRight',$deleteRight);
+		$this->assign('viewRight',$viewRight);
 		
 		return view();
 	}

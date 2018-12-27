@@ -1,5 +1,5 @@
 {layout name="layout" /}
-<h2>user list &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/user/add/')} ">add user</a></small></h2>
+<h2>user list &nbsp; &nbsp; &nbsp;{if condition="$addRight eq 1"}<small><a href="{:url('/admin/user/add/')} ">add user</a></small>{/if}</h2>
 <form action="{:url('/admin/User/index')}" method="POST">
 ID:<input type="text" name="id" id="id" value="{$search.id}">
 名:<input type="text" name="username" id="username" value="{$search.username}">
@@ -29,7 +29,13 @@ ID:<input type="text" name="id" id="id" value="{$search.id}">
        <td>{$vo.age}</td>
        <td>{$vo.country}</td>
        <td>{$vo.contact}</td>
-       <td><a href="{:url('/admin/user/add/id/'.$vo->id)} ">view</a> <a href="{:url('/admin/user/add/id/'.$vo->id)} ">edit</a>  <a onclick="return  confirm('confirm delete')" href="{:url('/admin/user/del/id/'.$vo->id)} ">delete</a></td>
+       <td>
+       
+       {if condition="$viewRight eq 1"}<a href="{:url('/admin/user/show/id/'.$vo->id)} ">view</a> &nbsp;{/if} 
+       {if condition="$editRight eq 1"}<a href="{:url('/admin/user/add/id/'.$vo->id)} ">edit</a> &nbsp;{/if}  
+       {if condition="$deleteRight eq 1"}<a onclick="return  confirm('confirm delete')" href="{:url('/admin/user/del/id/'.$vo->id)} ">delete</a>{/if}
+       
+       </td>
      </tr>
      {/foreach}
    </tbody>

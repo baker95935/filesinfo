@@ -1,0 +1,72 @@
+{layout name="layout" title="user add" /}
+ <form  id="defaultForm" role="form" method="POST"  action="{:url('/admin/user/add/')}">
+ 
+  
+  <div class="form-group">
+    <label for="exampleInputEmail">姓：</label>
+   {present name="data.familyname"}{$data.familyname}{/present}
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputEmail">名：</label>
+    {present name="data.username"}{$data.username}{/present}
+  </div>
+  
+   <div class="form-group">
+    <label for="exampleInputEmail">性别：</label>
+    {$data.sex|getSexName}
+   </div>
+   
+   <div class="form-group">
+    <label for="exampleInputEmail">年龄：</label>
+    {present name="data.age"}{$data.age}{/present}
+   </div>
+   
+   <div class="form-group">
+    <label for="exampleInputEmail">证件：</label>
+   {present name="data.idcard"}{$data.idcard}{/present}
+   </div>
+   
+   <div class="form-group">
+    <label for="exampleInputEmail">国籍：</label>
+    {present name="data.country"}{$data.country}{/present}
+   </div>
+   
+   <div class="form-group">
+    <label for="exampleInputEmail">住址：</label>
+    {present name="data.address"}{$data.address}{/present}
+   </div>
+   
+   <div class="form-group">
+    <label for="exampleInputEmail">联系方式：</label>
+    {present name="data.contact"}{$data.contact}{/present}
+   </div>
+   
+  	<div class="form-group">
+	     <label>pic：</label>
+	         {if condition="$data.pic neq ''"}
+	         <div {notpresent name="data.pic"} style="display:none" {/notpresent} id="pic_img_div">
+	             <img id="pic_img" src="{present name="data.pic"}{$data.pic}{/present}" width="100px" height="100px">
+	         </div>
+	         {/if}
+	 </div>
+  
+     <div class="form-group">
+    <label for="exampleInputEmail">备注：</label>
+    {present name="data.beizhu"}{$data.beizhu}{/present}
+   </div>
+  
+  <input type="hidden" name="__token__" value="{$Request.token}" />
+  <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />
+</form>	
+
+ 	<button type="button" id="back" class="btn btn-info" >return</button>
+ <script>
+ $(function () {
+
+ 	$('#back').click(function(){
+			window.location.href="{:url('/admin/information/index')}";
+	 	});
+
+ });
+ </script>
