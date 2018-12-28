@@ -3,43 +3,43 @@
  
   
   <div class="form-group">
-    <label for="exampleInputEmail">姓：</label>
+    <label for="exampleInputEmail">lastname：</label>
     <input type="text" class="form-control" name="familyname" value="{present name="data.familyname"}{$data.familyname}{/present}" id="famliy" placeholder="please input familyname">
   </div>
   
   <div class="form-group">
-    <label for="exampleInputEmail">名：</label>
+    <label for="exampleInputEmail">firstname：</label>
     <input type="text" class="form-control" name="username" value="{present name="data.username"}{$data.username}{/present}" id="username" placeholder="please input username">
   </div>
   
    <div class="form-group">
-    <label for="exampleInputEmail">性别：</label>
+    <label for="exampleInputEmail">sex：</label>
     <input type="radio" name="sex" value="1" {notpresent name="data.sex"} checked {/notpresent} {present name="data.sex"}{if condition="$data.sex eq 1"}checked{/if}{/present}>男
     <input type="radio" name="sex" value="2" {present name="data.sex"}{if condition="$data.sex eq 2"}checked{/if}{/present}>女
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">年龄：</label>
+    <label for="exampleInputEmail">age：</label>
     <input type="text" class="form-control" name="age" value="{present name="data.age"}{$data.age}{/present}" id="phone" placeholder="please input age">
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">证件：</label>
+    <label for="exampleInputEmail">idcard：</label>
     <input type="text" class="form-control" name="idcard" value="{present name="data.idcard"}{$data.idcard}{/present}" id="idcard" placeholder="please input idcard info">
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">国籍：</label>
+    <label for="exampleInputEmail">country：</label>
     <input type="text" class="form-control" name="country" value="{present name="data.country"}{$data.country}{/present}" id="country" placeholder="please input country">
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">住址：</label>
+    <label for="exampleInputEmail">address：</label>
     <input type="text" class="form-control" name="address" value="{present name="data.address"}{$data.address}{/present}" id="phone" placeholder="please input address">
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">联系方式：</label>
+    <label for="exampleInputEmail">contact：</label>
     <input type="text" class="form-control" name="contact" value="{present name="data.contact"}{$data.contact}{/present}" id="phone" placeholder="please input contact info">
    </div>
    
@@ -53,7 +53,7 @@
 	 </div>
   
      <div class="form-group">
-    <label for="exampleInputEmail">备注：</label>
+    <label for="exampleInputEmail">other：</label>
     <input type="text" class="form-control" name="beizhu" value="{present name="data.beizhu"}{$data.beizhu}{/present}" id="beizhu" placeholder="please input beizhu">
    </div>
   
@@ -101,7 +101,7 @@ KindEditor.ready(function(K) {
       allowFileManager : true
   });
   
-  window.editor = K.create('#editor_id', { langType : 'en' });  
+  window.editor = K.create('#beizhu', { langType : 'en' });  
   K('#pic').click(function() {
       editor.loadPlugin('image', function() {
           editor.plugin.imageDialog({

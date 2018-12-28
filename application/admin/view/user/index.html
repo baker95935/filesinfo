@@ -10,12 +10,15 @@ ID:<input type="text" name="id" id="id" value="{$search.id}">
    <thead>
      <tr>
        <th>ID</th>
-       <th>姓</th>
-       <th>名</th>
-       <th>性别</th>
-       <th>年龄</th>
-       <th>国籍</th>
-       <th>联系方式</th>
+       <th>lastname</th>
+       <th>firstname</th>
+       <th>sex</th>
+       <th>age</th>
+       <th>country</th>
+       <th>contact</th>
+       <th>idcard</th>
+       <th>pic</th>
+       <th>other</th>
        <th>manage</th>
      </tr>
    </thead>
@@ -29,6 +32,9 @@ ID:<input type="text" name="id" id="id" value="{$search.id}">
        <td>{$vo.age}</td>
        <td>{$vo.country}</td>
        <td>{$vo.contact}</td>
+       <td>{$vo.idcard}</td>
+       <td>{if condition="$vo.pic neq ''"}<a target="_blank" href="{$vo.pic}"><img src="{$vo.pic}" width="20px" height="20px"></a>{/if}</td>
+       <td id='otd'>{$vo.beizhu}</td>
        <td>
        
        {if condition="$viewRight eq 1"}<a href="{:url('/admin/user/show/id/'.$vo->id)} ">view</a> &nbsp;{/if} 
@@ -43,4 +49,23 @@ ID:<input type="text" name="id" id="id" value="{$search.id}">
  <div align="right">
 {$list->render()}
 </div>
+ <script   language="JavaScript"   type="text/javascript">   
+  function   set()   
+  {   
+  var   o   =   document.getElementById("otd");   
+  var   cns   =   o.childNodes;   
+  for(var   i=0;i<cns.length;i++)   
+    {   
+  var   __temp   =   cns[i];   
+ if(__temp.tagName!=null){
+  if(__temp.tagName.toLowerCase()   ==   "img")   
+  {   
+  __temp.width   =   20;   
+  __temp.height   =   20;   
+  }   
+  }  
+} 
+  }   
+  set();   
+  </script>   
  

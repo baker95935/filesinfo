@@ -3,42 +3,42 @@
  
   
   <div class="form-group">
-    <label for="exampleInputEmail">姓：</label>
+    <label for="exampleInputEmail">lastname：</label>
    {present name="data.familyname"}{$data.familyname}{/present}
   </div>
   
   <div class="form-group">
-    <label for="exampleInputEmail">名：</label>
+    <label for="exampleInputEmail">firstname：</label>
     {present name="data.username"}{$data.username}{/present}
   </div>
   
    <div class="form-group">
-    <label for="exampleInputEmail">性别：</label>
+    <label for="exampleInputEmail">sex：</label>
     {$data.sex|getSexName}
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">年龄：</label>
+    <label for="exampleInputEmail">age：</label>
     {present name="data.age"}{$data.age}{/present}
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">证件：</label>
+    <label for="exampleInputEmail">idcard：</label>
    {present name="data.idcard"}{$data.idcard}{/present}
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">国籍：</label>
+    <label for="exampleInputEmail">country：</label>
     {present name="data.country"}{$data.country}{/present}
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">住址：</label>
+    <label for="exampleInputEmail">address：</label>
     {present name="data.address"}{$data.address}{/present}
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">联系方式：</label>
+    <label for="exampleInputEmail">contact：</label>
     {present name="data.contact"}{$data.contact}{/present}
    </div>
    
@@ -52,7 +52,7 @@
 	 </div>
   
      <div class="form-group">
-    <label for="exampleInputEmail">备注：</label>
+    <label for="exampleInputEmail">other：</label>
     {present name="data.beizhu"}{$data.beizhu}{/present}
    </div>
   
@@ -65,8 +65,7 @@
  $(function () {
 
  	$('#back').click(function(){
-			window.location.href="{:url('/admin/information/index')}";
+			window.location.href="{:url('/admin/user/index')}";
 	 	});
-
  });
  </script>

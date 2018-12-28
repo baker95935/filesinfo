@@ -27,8 +27,8 @@
           
           {if condition="$rights eq 'all'"}  
 	          <ul class="nav nav-sidebar">
-	            <li {if condition="$nav eq 'User'"}class="active" {/if}><a href="{:url('/admin/user/index/')}">客户</a></li>
-	            <li {if condition="$nav eq 'Information'"}class="active" {/if}><a href="{:url('/admin/information/index/')}">files</a></li>
+	            <li {if condition="$nav eq 'User'"}class="active" {/if}><a href="{:url('/admin/user/index/')}">customers</a></li>
+	            <!-- <li {if condition="$nav eq 'Information'"}class="active" {/if}><a href="{:url('/admin/information/index/')}">files</a></li> -->
 	          </ul>
 	          <ul class="nav nav-sidebar">
 	           <li {if condition="$nav eq 'Member'"}class="active" {/if}><a href="{:url('/admin/member/index/')}">admin</a></li>
@@ -37,11 +37,9 @@
           {else /}
               <ul class="nav nav-sidebar">
 	            {if condition="in_array('user',$rights)"}
-	            	<li {if condition="$nav eq 'User'"}class="active" {/if}><a href="{:url('/admin/user/index/')}">客户</a></li>
+	            	<li {if condition="$nav eq 'User'"}class="active" {/if}><a href="{:url('/admin/user/index/')}">customers</a></li>
 	            {/if}
-	            {if condition="in_array('files',$rights)"}
-	            	<li {if condition="$nav eq 'Information'"}class="active" {/if}><a href="{:url('/admin/information/index/')}">files</a></li>
-	            {/if}
+	            	<!--<li {if condition="$nav eq 'Information'"}class="active" {/if}><a href="{:url('/admin/information/index/')}">files</a></li> -->
 	          </ul>
           {/if}
  
