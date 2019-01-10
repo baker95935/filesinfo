@@ -12,13 +12,15 @@ class User extends Common
 		$users=new userModel();
 		
 		$request = request();
-		$search['id']=$request->param('id');
-		//$search['username']=$request->param('username');
+		$search['sex']=$request->param('sex');
 		$search['username']=$request->param('username');
+		$search['familyname']=$request->param('familyname');
+		$search['birthday']=$request->param('birthday');
 	 
-		!empty($search['id']) && $where['id']=['=',$search['id']];
+		!empty($search['age']) && $where['age']=['=',$search['age']];
 		!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
-		!empty($search['realname']) && $where['realname']=['like',"%".$search['realname']."%"];
+		!empty($search['familyname']) && $where['familyname']=['like',"%".$search['familyname']."%"];
+		!empty($search['birthday']) && $where['birthday']=['=',$search['birthday']];
 		
 		empty($where['id']) && $where['id']=['>',0];
 		
@@ -31,8 +33,11 @@ class User extends Common
 		$editRight=checkGroupRights($group,'useredit');
 		$deleteRight=checkGroupRights($group,'userdelete');
 		$viewRight=checkGroupRights($group,'userview');
-		
-		$list=$users->getListInfo($where,array('search'=>$search));
+		$listRight=checkGroupRights($group,'userlist');
+	 
+		if($search['username'] || $listRight) {
+			$list=$users->getListInfo($where,array('search'=>$search));
+		}
 		$this->assign('list',$list);
 		$this->assign('search',$search);
 		
@@ -58,6 +63,7 @@ class User extends Common
 				'username'=>$request->param('username'),
 				'age'=>$request->param('age'),
 				'sex'=>$request->param('sex'),
+				'birthday'=>$request->param('birthday'),
 					
 				'idcard'=>$request->param('idcard'),
 				'country'=>$request->param('country'),

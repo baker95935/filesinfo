@@ -131,6 +131,17 @@ function onlineTime($start_time,$end_time)
     	return $res;
     }
     
+    //获取用户组的名称
+    function getGroupName($id)
+    {
+    	$res='';
+    	if($id) {
+    		$group=model('Group');
+    		$tmp=$group->find($id);
+    		!empty($tmp) && $res=$tmp['name'];
+    	}
+    	return $res;
+    }
     
     //检查用户组权限
     function checkGroupRights($groupid,$right)

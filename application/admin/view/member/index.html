@@ -9,7 +9,8 @@ username：<input type="text" name="search" id="search" value="{$search}">
    <thead>
      <tr>
        <th>ID</th>
-       <th>gruopname</th>
+       <th>username</th>
+       <th>group</th>
        <th>realname</th>
        <th>phone</th>
        <th>status</th>
@@ -22,6 +23,7 @@ username：<input type="text" name="search" id="search" value="{$search}">
      <tr>
        <td>{$vo.id}</td>
        <td>{$vo.username}</td>
+       <td>{$vo.group|getGroupName}</td>
        <td>{$vo.realname}</td>
        <td>{$vo.phone}</td>
        <td>{$vo.status|getStatusName}</td>

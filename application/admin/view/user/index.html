@@ -1,9 +1,9 @@
 {layout name="layout" /}
 <h2>user list &nbsp; &nbsp; &nbsp;{if condition="$addRight eq 1"}<small><a href="{:url('/admin/user/add/')} ">add user</a></small>{/if}</h2>
-<form action="{:url('/admin/User/index')}" method="POST">
-lastname:<input type="text" name="familyname" id="familyname" value="{$search.familyname}">
-firstname:<input type="text" name="username" id="username" value="{$search.username}">
-birthday:<input   class="form_datetime" type="text" name="birthday" id="birthday" value="{$search.birthday}">
+<form action="{:url('/admin/User/index')}" id="searchForm" method="POST">
+lastname:<input  placeholder="please input familyname" type="text" name="familyname" id="familyname" value="{$search.familyname}">
+firstname:<input placeholder="please input firstname" type="text" name="username" id="username" value="{$search.username}">
+birthday:<input placeholder="please input birthday"  class="form_datetime" type="text" name="birthday" id="birthday" value="{$search.birthday}">
 sex:
 <select name="sex" id="sex">
 	<option value="1">male</option>
@@ -23,6 +23,7 @@ sex:
        <th>country</th>
        <th>contact</th>
        <th>idcard</th>
+       <th>birthday</th>
        <th>address</th>
        <th>pic</th>
        <th>other</th>
@@ -40,6 +41,7 @@ sex:
        <td>{$vo.country}</td>
        <td>{$vo.contact}</td>
        <td>{$vo.idcard}</td>
+       <td>{$vo.birthday}</td>
        <td>{$vo.address}</td>
        <td>{if condition="$vo.pic neq ''"}<a target="_blank" href="{$vo.pic}"><img src="{$vo.pic}" width="20px" height="20px"></a>{/if}</td>
        <td id='otd'>{$vo.beizhu}</td>
@@ -55,7 +57,7 @@ sex:
    </tbody>
  </table>
  <div align="right">
-{$list->render()}
+{if condition="!empty($list)"}{$list->render()}{/if}
 </div>
  <script   language="JavaScript"   type="text/javascript">   
   function   set()   
@@ -80,5 +82,48 @@ sex:
 <script type="text/javascript" src="__ROOT__static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="__ROOT__static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
-    $(".birthday").datetimepicker({format: 'yyyy-mm-dd'});
+    $("#birthday").datetimepicker({　
+    	format: 'yyyy-mm-dd',
+  　　　　　　language: 'zh-CN',
+  　　　　　　weekStart: 1,
+  　　　　　　autoclose: 1,
+  　　　　　　todayHighlight: 1,
+  　　　　　　startView: 2,
+  　　　　　　minView: 2,  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+  　　　　　　forceParse: 0});
 </script>  
+ <script type="text/javascript">
+$(document).ready(function() {
+    $('#searchForm').bootstrapValidator({
+        fields: {
+        	username: {
+                message: 'The firstname is not valid',
+                validators: {
+                    notEmpty: {
+                    },
+                    
+                }
+            },
+            familyname: {
+                message: 'The familyname is not valid',
+                validators: {
+                    notEmpty: {
+                    },
+                    
+                }
+            },
+            
+            birthday: {
+                message: 'The birthday is not valid',
+                validators: {
+                    notEmpty: {
+                    },
+                    
+                }
+            },
+ 
+           
+        }
+    });
+});
+</script>
