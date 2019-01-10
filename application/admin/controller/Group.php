@@ -90,7 +90,12 @@ class Group extends Common
 		//获取权限
 		$menuList=array(
 				//'files'=>array('add','delete','edit','view'),
-				'user'=>array('add','delete','edit','view','list'),
+				'user'=>array('add','list',
+					'family-name-sex-birthday-delete','family-name-sex-birthday-edit','family-name-sex-birthday-view',
+					'country-idcard-delete','country-idcard-edit','country-idcard-view',
+					'phone-address-delete','phone-address-edit','phone-address-view',
+					'pic-other-delete','pic-other--edit','pic-other--view',
+				),
 		);
 		
 		//设置默认显示的权限
