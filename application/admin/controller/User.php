@@ -28,12 +28,49 @@ class User extends Common
 		$group=Session::get('group');
 		
 		//增删改查校验
-		$addRight=$editRight=$deleteRight=$viewRight=0;
+		$addRight=$listRight=0;
 		$addRight=checkGroupRights($group,'useradd');
-		$editRight=checkGroupRights($group,'useredit');
-		$deleteRight=checkGroupRights($group,'userdelete');
-		$viewRight=checkGroupRights($group,'userview');
 		$listRight=checkGroupRights($group,'userlist');
+		
+		
+		$familyDelete=$familyEdit=$familyView=0;
+		//4组权限判断
+		$familyDelete=checkGroupRights($group,'userfamily-name-sex-birthday-delete');
+		$familyEdit=checkGroupRights($group,'userfamily-name-sex-birthday-edit');
+		$familyView=checkGroupRights($group,'userfamily-name-sex-birthday-view');
+		$this->assign('familyDelete',$familyDelete);
+		$this->assign('familyEdit',$familyEdit);
+		$this->assign('familyView',$familyView);
+		
+		
+		$countryDelete=$countryEdit=$countryView=0;
+		$countryDelete=checkGroupRights($group,'usercountry-idcard-delete');
+		$countryEdit=checkGroupRights($group,'usercountry-idcard-edit');
+		$countryView=checkGroupRights($group,'usercountry-idcard-view');
+		
+		$this->assign('countryDelete',$countryDelete);
+		$this->assign('countryEdit',$countryEdit);
+		$this->assign('countryView',$countryView);
+		
+		$phoneDelete=$phoneEdit=$phoneView=0;
+		$phoneDelete=checkGroupRights($group,'userphone-address-delete');
+		$phoneEdit=checkGroupRights($group,'userphone-address-edit');
+		$phoneView=checkGroupRights($group,'userphone-address-view');
+		
+		$this->assign('phoneDelete',$phoneDelete);
+		$this->assign('phoneEdit',$phoneEdit);
+		$this->assign('phoneView',$phoneView);
+		
+		$picDelete=$picEdit=$picView=0;
+		$picDelete=checkGroupRights($group,'userpic-other-delete');
+		$picEdit=checkGroupRights($group,'userpic-other-edit');
+		$picView=checkGroupRights($group,'userpic-other-view');
+		
+		$this->assign('picDelete',$picDelete);
+		$this->assign('picEdit',$picEdit);
+		$this->assign('picView',$picView);
+		
+		
 	 
 		if($search['username'] || $listRight) {
 			$list=$users->getListInfo($where,array('search'=>$search));
@@ -42,9 +79,6 @@ class User extends Common
 		$this->assign('search',$search);
 		
 		$this->assign('addRight',$addRight);
-		$this->assign('editRight',$editRight);
-		$this->assign('deleteRight',$deleteRight);
-		$this->assign('viewRight',$viewRight);
 		
 		return view();
 	}
@@ -103,6 +137,24 @@ class User extends Common
 			
 		$data=array();
 		!empty($id) && $data=UserModel::get($id);
+		
+		$countryEdit=$familyEdit=$phoneEdit=$picEdit=0;
+		//如果有数据 那么就是编辑 进行校验
+		if(!empty($data)) {
+			
+			//登录用户的权限进行校验
+			$group=Session::get('group');
+			$countryEdit=checkGroupRights($group,'usercountry-idcard-edit');
+			$familyEdit=checkGroupRights($group,'userfamily-name-sex-birthday-edit');
+			$phoneEdit=checkGroupRights($group,'userphone-address-edit');
+			$picEdit=checkGroupRights($group,'userpic-other-edit');
+		
+		}
+		
+		$this->assign('countryEdit',$countryEdit);
+		$this->assign('familyEdit',$familyEdit);
+		$this->assign('phoneEdit',$phoneEdit);
+		$this->assign('picEdit',$picEdit);
  
 		$this->assign('data',$data);
 		return view();
@@ -117,7 +169,40 @@ class User extends Common
 			
 			$id=$request->param('id');
 			$result=0;
-			$result=$user->deleteInfo($id);
+			//$result=$user->deleteInfo($id);
+			
+			//登录用户的权限进行校验
+			$group=Session::get('group');
+			$countryDelete=checkGroupRights($group,'usercountry-idcard-delete');
+			$familyDelete=checkGroupRights($group,'userfamily-name-sex-birthday-delete');
+			$phoneDelete=checkGroupRights($group,'userphone-address-delete');
+			$picDelete=checkGroupRights($group,'userpic-other-delete');
+			
+			$data=array();
+			if($familyDelete==1) {
+				$data['familyname']='';
+				$data['username']='';
+				$data['sex']=0;
+				$data['birthday']=0;
+			}
+			
+			if($countryDelete==1) {
+				$data['country']='';
+				$data['idcard']='';
+			}
+			
+			if($phoneDelete==1) {
+				$data['contact']='';
+				$data['address']='';
+			}
+			
+			if($picDelete==1) {
+				$data['age']=0;
+				$data['pic']='';
+				$data['beizhu']='';
+			}
+			
+			$result=$user->addInfo($data,array('id'=>$id));//更新
 			
 			if($result==0){
 				$this->error('operation failed,please retry');
@@ -138,7 +223,22 @@ class User extends Common
 			
 		$data=array();
 		!empty($id) && $data=userModel::get($id);
-	
+		
+		//登录用户的权限进行校验
+		$group=Session::get('group');
+		
+		$countryView=$familyView=$phoneView=$picView=0;
+		
+		$countryView=checkGroupRights($group,'usercountry-idcard-view');
+		$familyView=checkGroupRights($group,'userfamily-name-sex-birthday-view');
+		$phoneView=checkGroupRights($group,'userphone-address-view');
+		$picView=checkGroupRights($group,'userpic-other-view');
+		
+		$this->assign('countryView',$countryView);
+		$this->assign('familyView',$familyView);
+		$this->assign('phoneView',$phoneView);
+		$this->assign('picView',$picView);
+		
 		$this->assign('data',$data);
 		return view();
 	}

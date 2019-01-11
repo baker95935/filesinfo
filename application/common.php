@@ -24,7 +24,8 @@ function getSexName($sex)
 {
 	$name="";
 
-	$sex==1?$name='male':$name="female";
+	$sex==1 && $name='male';
+	$sex==2 && $name="female";
 
 	return $name;
 }

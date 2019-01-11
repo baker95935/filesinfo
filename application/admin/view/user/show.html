@@ -1,7 +1,7 @@
 {layout name="layout" title="user add" /}
  <form  id="defaultForm" role="form" method="POST"  action="{:url('/admin/user/add/')}">
  
-  
+  {if condition="$familyView eq 1"}
   <div class="form-group">
     <label for="exampleInputEmail">lastname：</label>
    {present name="data.familyname"}{$data.familyname}{/present}
@@ -18,15 +18,12 @@
    </div>
    
    <div class="form-group">
-    <label for="exampleInputEmail">age：</label>
-    {present name="data.age"}{$data.age}{/present}
-   </div>
-   
-   <div class="form-group">
     <label for="exampleInputEmail">birthday：</label>
     {present name="data.birthday"}{$data.birthday}{/present}
    </div>
-   
+   {/if}
+
+   {if condition="$countryView eq 1"}
    <div class="form-group">
     <label for="exampleInputEmail">idcard：</label>
    {present name="data.idcard"}{$data.idcard}{/present}
@@ -36,7 +33,9 @@
     <label for="exampleInputEmail">country：</label>
     {present name="data.country"}{$data.country}{/present}
    </div>
+   {/if}
    
+   {if condition="$phoneView eq 1"}
    <div class="form-group">
     <label for="exampleInputEmail">address：</label>
     {present name="data.address"}{$data.address}{/present}
@@ -46,7 +45,10 @@
     <label for="exampleInputEmail">contact：</label>
     {present name="data.contact"}{$data.contact}{/present}
    </div>
+   {/if}
    
+   
+   {if condition="$picView eq 1"}
   	<div class="form-group">
 	     <label>pic：</label>
 	         {if condition="$data.pic neq ''"}
@@ -60,6 +62,12 @@
     <label for="exampleInputEmail">other：</label>
     {present name="data.beizhu"}{$data.beizhu}{/present}
    </div>
+   
+   <div class="form-group">
+    <label for="exampleInputEmail">age：</label>
+    {present name="data.age"}{$data.age}{/present}
+   </div>
+   {/if}
   
   <input type="hidden" name="__token__" value="{$Request.token}" />
   <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />

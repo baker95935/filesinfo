@@ -16,17 +16,22 @@ sex:
    <thead>
      <tr>
        <th>ID</th>
+       
        <th>lastname</th>
        <th>firstname</th>
        <th>sex</th>
-       <th>age</th>
-       <th>country</th>
-       <th>contact</th>
-       <th>idcard</th>
        <th>birthday</th>
+        
+       <th>country</th>
+       <th>idcard</th>
+        
+       <th>contact</th>
        <th>address</th>
+       
        <th>pic</th>
        <th>other</th>
+       <th>age</th>
+       
        <th>manage</th>
      </tr>
    </thead>
@@ -34,23 +39,45 @@ sex:
    {foreach $list as $vo}
      <tr>
        <td>{$vo.id}</td>
-       <td>{$vo.familyname}</td>
-       <td>{$vo.username}</td>
-       <td>{$vo.sex|getSexName}</td>
-       <td>{$vo.age}</td>
-       <td>{$vo.country}</td>
-       <td>{$vo.contact}</td>
-       <td>{$vo.idcard}</td>
-       <td>{$vo.birthday}</td>
-       <td>{$vo.address}</td>
-       <td>{if condition="$vo.pic neq ''"}<a target="_blank" href="{$vo.pic}"><img src="{$vo.pic}" width="20px" height="20px"></a>{/if}</td>
+       {if condition="$familyView eq 1"}
+       <td> {$vo.familyname} </td>
+       <td> {$vo.username}   </td>
+       <td> {$vo.sex|getSexName} </td>
+       <td> {$vo.birthday} </td>
+       {else /}
+       <td></td>
+       <td></td>
+       <td></td>
+       <td></td>
+       {/if}
+        
+       {if condition="$countryView eq 1"} 
+       <td> {$vo.country} </td>
+       <td> {$vo.idcard} </td>
+       {else /}
+      <td></td>
+      <td></td>
+       {/if}
+       
+       {if condition="$phoneView eq 1"}
+       <td> {$vo.contact} </td>
+       <td> {$vo.address} </td>
+       {else /}
+      <td></td><td></td>
+       {/if}
+       
+       {if condition="$picView eq 1"}
+       <td> {if condition="$vo.pic neq ''"}<a target="_blank" href="{$vo.pic}"><img src="{$vo.pic}" width="20px" height="20px"></a>{/if} </td>
        <td id='otd'>{$vo.beizhu}</td>
+       <td> {$vo.age} </td>
+       {else /}
+      <td></td><td></td><td></td>
+       {/if}
+       
        <td>
-       
-       {if condition="$viewRight eq 1"}<a href="{:url('/admin/user/show/id/'.$vo->id)} ">view</a> &nbsp;{/if} 
-       {if condition="$editRight eq 1"}<a href="{:url('/admin/user/add/id/'.$vo->id)} ">edit</a> &nbsp;{/if}  
-       {if condition="$deleteRight eq 1"}<a onclick="return  confirm('confirm delete')" href="{:url('/admin/user/del/id/'.$vo->id)} ">delete</a>{/if}
-       
+        <a href="{:url('/admin/user/show/id/'.$vo->id)} ">view</a> &nbsp; 
+        <a href="{:url('/admin/user/add/id/'.$vo->id)} ">edit</a> &nbsp; 
+        <a onclick="return  confirm('confirm delete')" href="{:url('/admin/user/del/id/'.$vo->id)} ">delete</a> 
        </td>
      </tr>
      {/foreach}

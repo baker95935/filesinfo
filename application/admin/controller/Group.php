@@ -94,7 +94,7 @@ class Group extends Common
 					'family-name-sex-birthday-delete','family-name-sex-birthday-edit','family-name-sex-birthday-view',
 					'country-idcard-delete','country-idcard-edit','country-idcard-view',
 					'phone-address-delete','phone-address-edit','phone-address-view',
-					'pic-other-delete','pic-other--edit','pic-other--view',
+					'pic-other-delete','pic-other-edit','pic-other-view',
 				),
 		);
 		
