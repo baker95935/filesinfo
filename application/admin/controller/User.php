@@ -265,11 +265,13 @@ class User extends Common
 					$data['beizhu']='';
 				}
 				
-				$result=$user->addInfo($data,array('id'=>$id));//更新
+				if(!empty($data)) {
+					$result=$user->addInfo($data,array('id'=>$id));//更新
+				}  
 			}
 			
 			if($result==0){
-				$this->error('operation failed,please retry');
+				$this->error('operation failed,please retry', '/admin/user/index/');
 			} else {
 				$this->success('operation success', '/admin/user/index/');
 			}
