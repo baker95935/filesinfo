@@ -232,36 +232,41 @@ class User extends Common
 			
 			//登录用户的权限进行校验
 			$group=Session::get('group');
-			$countryDelete=checkGroupRights($group,'usercountry-idcard-delete');
-			$familyDelete=checkGroupRights($group,'userfamily-name-sex-birthday-delete');
-			$phoneDelete=checkGroupRights($group,'userphone-address-delete');
-			$picDelete=checkGroupRights($group,'userpic-other-delete');
-			
-			$data=array();
-			if($familyDelete==1) {
-				$data['familyname']='';
-				$data['username']='';
-				$data['sex']=0;
-				$data['birthday']=0;
+			if($group==1) {
+				$result=$user->deleteInfo($id);
+			} else {
+				
+				$countryDelete=checkGroupRights($group,'usercountry-idcard-delete');
+				$familyDelete=checkGroupRights($group,'userfamily-name-sex-birthday-delete');
+				$phoneDelete=checkGroupRights($group,'userphone-address-delete');
+				$picDelete=checkGroupRights($group,'userpic-other-delete');
+				
+				$data=array();
+				if($familyDelete==1) {
+					$data['familyname']='';
+					$data['username']='';
+					$data['sex']=0;
+					$data['birthday']=0;
+				}
+				
+				if($countryDelete==1) {
+					$data['country']='';
+					$data['idcard']='';
+				}
+				
+				if($phoneDelete==1) {
+					$data['contact']='';
+					$data['address']='';
+				}
+				
+				if($picDelete==1) {
+					$data['age']=0;
+					$data['pic']='';
+					$data['beizhu']='';
+				}
+				
+				$result=$user->addInfo($data,array('id'=>$id));//更新
 			}
-			
-			if($countryDelete==1) {
-				$data['country']='';
-				$data['idcard']='';
-			}
-			
-			if($phoneDelete==1) {
-				$data['contact']='';
-				$data['address']='';
-			}
-			
-			if($picDelete==1) {
-				$data['age']=0;
-				$data['pic']='';
-				$data['beizhu']='';
-			}
-			
-			$result=$user->addInfo($data,array('id'=>$id));//更新
 			
 			if($result==0){
 				$this->error('operation failed,please retry');
