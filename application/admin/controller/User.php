@@ -90,6 +90,7 @@ class User extends Common
 		
 		$id=$request->param('id');
 	 
+		
 		if($request->method()=='POST') {
 			//数据获取
 			$data=array(
@@ -135,27 +136,85 @@ class User extends Common
 	
 		}
 			
+		 
+		return view();
+	}
+	
+
+	public function edit()
+	{
+		$user=new userModel();
+		$request = request();
+	
+		$id=$request->param('id');
+	
+	
+		if($request->method()=='POST') {
+			//数据获取
+			$data=array(
+					'familyname'=>$request->param('familyname'),
+					'username'=>$request->param('username'),
+					'age'=>$request->param('age'),
+					'sex'=>$request->param('sex'),
+					'birthday'=>$request->param('birthday'),
+						
+					'idcard'=>$request->param('idcard'),
+					'country'=>$request->param('country'),
+					'address'=>$request->param('address'),
+					'contact'=>$request->param('contact'),
+					'pic'=>$request->param('pic_url'),
+					'beizhu'=>$request->param('beizhu'),
+						
+					'id'=>$request->param('id'),
+			);
+				
+			//数据校验
+			$validate = validate('user');
+				
+			if(!$validate->check($data)){
+				$this->error($validate->getError());
+					
+			} else {
+					
+	
+				$result=0;
+				if(empty($id)){//添加
+					$data['create_time']=time();
+					$result=$user->addInfo($data);
+				} else {
+					$result=$user->addInfo($data,array('id'=>$id));//更新
+				}
+	
+				if($result) {
+					$this->success('operation success', '/admin/user/index/');
+				} else {
+					$this->success('operation failed,please retry', '/admin/user/index/');
+				}
+			}
+	
+		}
+			
 		$data=array();
 		!empty($id) && $data=UserModel::get($id);
-		
+	
 		$countryEdit=$familyEdit=$phoneEdit=$picEdit=0;
 		//如果有数据 那么就是编辑 进行校验
 		if(!empty($data)) {
-			
+				
 			//登录用户的权限进行校验
 			$group=Session::get('group');
 			$countryEdit=checkGroupRights($group,'usercountry-idcard-edit');
 			$familyEdit=checkGroupRights($group,'userfamily-name-sex-birthday-edit');
 			$phoneEdit=checkGroupRights($group,'userphone-address-edit');
 			$picEdit=checkGroupRights($group,'userpic-other-edit');
-		
+	
 		}
-		
+	
 		$this->assign('countryEdit',$countryEdit);
 		$this->assign('familyEdit',$familyEdit);
 		$this->assign('phoneEdit',$phoneEdit);
 		$this->assign('picEdit',$picEdit);
- 
+	
 		$this->assign('data',$data);
 		return view();
 	}
